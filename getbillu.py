@@ -1,6 +1,9 @@
 # Fetches a random cat video link from youtube
-from youtubesearchpython import VideosSearch
+# Search constraints :
+# length = < 4 Minutes [ Short ]
 
-cats = VideosSearch('cat small baby', limit = 10)
+from youtubesearchpython import *
+
+cats = CustomSearch('cat small baby',  VideoDurationFilter.short, limit = 10)
 
 print(cats.result())
