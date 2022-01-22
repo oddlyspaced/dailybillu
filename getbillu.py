@@ -3,7 +3,12 @@
 # length = < 4 Minutes [ Short ]
 
 from youtubesearchpython import *
+import random
 
-cats = CustomSearch('cat small baby',  VideoDurationFilter.short, limit = 10)
+# Read random query from queries file
+query = random.choice(open("queries", "r").readlines())
+print(query)
+
+cats = CustomSearch(query,  VideoDurationFilter.short, limit = 10)
 
 print(cats.result())
