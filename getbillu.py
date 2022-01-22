@@ -3,7 +3,7 @@ from youtubesearchpython import *
 import random
 from config import Config
 
-class Billu :
+class GetBillu :
     def __init__(self) :
         pass
 
