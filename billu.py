@@ -1,11 +1,18 @@
 import smtplib, ssl
 from config import Config
 from getbillu import GetBillu
+from os.path import exists
 
-# ready day number
-f = open("day", "r")
-day = int(f.readline())
-f.close()
+if exists("day") == False :
+    day = 1
+    f = open("day", "w+")
+    f.write("1")
+    f.close()
+else :
+    # read day number
+    f = open("day", "r")
+    day = int(f.readline())
+    f.close()
 
 # prepare message
 message = """\
