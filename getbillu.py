@@ -1,8 +1,4 @@
 # Fetches a random cat video link from youtube
-# Search constraints :
-# length = < 4 Minutes [ Short ]
-
-from nis import cat
 from youtubesearchpython import *
 import random
 from config import Config
@@ -38,5 +34,3 @@ class Billu :
         # save it and return link
         self.save_billu(cats.result()['result'][0]["id"])
         return cats.result()['result'][0]["link"]
-
-print(Billu().get_single_billu())
