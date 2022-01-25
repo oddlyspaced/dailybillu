@@ -1,8 +1,15 @@
+# /ᐠ｡ꞈ｡ᐟ✿\
 # Dailybillu
 
-It is an automated newsletter that is sent over email to members with free subscription that provides cat videos from randomly generated Youtube links.
+Python3 Script to fetch a random cat video from Youtube and send it via email.
+
+Using `cron` or any automater tool this script can be automated to work as a newsletter.
+
+Sample Email :
+
+TODO
+
 
 ### Technologies Used
-
-- Automation of email over SMTP using Python
-- Random Youtube link generation using Python
+- [youtubesearchpython](https://github.com/alexmercerind/youtube-search-python) for finding videos from YouTube
+- smtplib, ssl for sending mails through a Google Mail Account
