@@ -1,5 +1,5 @@
 import smtplib, ssl
-from threading import local
+from webbrowser import get
 from config import Config
 from os.path import exists
 from youtubesearchpython import *
@@ -68,8 +68,9 @@ def get_day_count() :
 
 def update_day_count() :
     # update day number for next day
-    f = open("day", "w")
-    f.write(str(get_day_count() + 1))
+    d = get_day_count()
+    f = open("day", "w+")
+    f.write(str(d + 1))
     f.close()
 
 message = """\
