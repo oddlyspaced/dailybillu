@@ -1,4 +1,5 @@
 import smtplib, ssl
+from threading import local
 from config import Config
 from os.path import exists
 from youtubesearchpython import *
@@ -37,6 +38,7 @@ class GetBillu :
         self.save_billu(cats.result()['result'][0]["id"])
         return cats.result()['result'][0]["link"]
 
+# Generates Email Content
 class MeowSays :
     greetings = ["Meow", "Meow Meow", "Meowww"]
     opening = ["Meow", "Meow Meow!", "Meow Meow Meow!"]
@@ -51,20 +53,27 @@ class MeowSays :
         msg = random.choice(self.greetings) + ",\n" + random.choice(self.opening) + "\n\n" + random.choice(self.body) + "\n\n" + random.choice(self.regards) + "\n" + random.choice(self.name) + "\n" + random.choice(self.sign)
         return msg
 
-if exists("day") == False :
-    day = 1
-    f = open("day", "w+")
-    f.write("1")
-    f.close()
-else :
-    # read day number
-    f = open("day", "r")
-    day = int(f.readline())
+def get_day_count() :
+    if exists("day") == False :
+        day = 1
+        f = open("day", "w+")
+        f.write("1")
+        f.close()
+    else :
+        # read day number
+        f = open("day", "r")
+        day = int(f.readline())
+        f.close()
+    return int(day)
+
+def update_day_count() :
+    # update day number for next day
+    f = open("day", "w")
+    f.write(str(get_day_count() + 1))
     f.close()
 
-# prepare message
 message = """\
-Subject: Daily Billu - Day """ + str(day) + """
+Subject: Daily Billu - Day """ + str(get_day_count()) + """
 
 """ + MeowSays().say() + "\n\n" + GetBillu().get_single_billu()
 
@@ -76,7 +85,4 @@ with smtplib.SMTP(Config.SMTP_SERVER, Config.SMTP_PORT) as server:
     for receiver in Config.RECEIVER_EMAIL :
         server.sendmail(Config.CLIENT_EMAIL, receiver, message.encode('utf-8'))
 
-# update day number for next day
-f = open("day", "w")
-f.write(str(day+1))
-f.close()
+update_day_count()
