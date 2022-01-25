@@ -37,6 +37,20 @@ class GetBillu :
         self.save_billu(cats.result()['result'][0]["id"])
         return cats.result()['result'][0]["link"]
 
+class MeowSays :
+    greetings = ["Meow", "Meow Meow", "Meowww"]
+    opening = ["Meow", "Meow Meow!", "Meow Meow Meow!"]
+    body = ["Meow Meow Meow Meow Meow ₍⸍⸌̣ʷ̣̫⸍̣⸌₎", "Meow Meow Meow 👍", "Meow Meow 😽", "Meow Meow Meow! ☀️"]
+    regards = ["Meow,"]
+    name = ["Meow"]
+    sign = ["/ᐠ｡ꞈ｡ᐟ\\", " /ᐠ｡‸｡ᐟ\\", " /ᐠ｡ꞈ｡ᐟ✿\\"]
+    def __init__(self) :
+        pass
+
+    def say(self) :
+        msg = random.choice(self.greetings) + ",\n" + random.choice(self.opening) + "\n\n" + random.choice(self.body) + "\n\n" + random.choice(self.regards) + "\n" + random.choice(self.name) + "\n" + random.choice(self.sign)
+        return msg
+
 if exists("day") == False :
     day = 1
     f = open("day", "w+")
@@ -52,14 +66,7 @@ else :
 message = """\
 Subject: Daily Billu - Day """ + str(day) + """
 
-Meow,
-Meow meow!
-Meow Meow Meow Meow.
-
-Meow,
-Meow
-
-""" + GetBillu().get_single_billu()
+""" + MeowSays().say() + "\n\n" + GetBillu().get_single_billu()
 
 # open server and send mail
 context = ssl.create_default_context()
@@ -67,7 +74,7 @@ with smtplib.SMTP(Config.SMTP_SERVER, Config.SMTP_PORT) as server:
     server.starttls(context = context)
     server.login(Config.CLIENT_EMAIL, Config.CLIENT_PASSWORD)
     for receiver in Config.RECEIVER_EMAIL :
-        server.sendmail(Config.CLIENT_EMAIL, receiver, message)
+        server.sendmail(Config.CLIENT_EMAIL, receiver, message.encode('utf-8'))
 
 # update day number for next day
 f = open("day", "w")
