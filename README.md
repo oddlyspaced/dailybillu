@@ -1,6 +1,8 @@
 # /ᐠ｡ꞈ｡ᐟ✿\
 # Dailybillu
 
+Moved to : https://github.com/ananya0809/dailybillu
+
 Python3 Script to fetch a random cat video from Youtube and send it via email.
 
 Using `cron` or any automater tool this script can be automated to work as a newsletter.
